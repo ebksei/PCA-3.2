@@ -1,16 +1,20 @@
 package pca.laboratorio3;
 
+import pca.laboratorio3.util.*;
+
 public class Exclusion {
 
 	private int numProcesos;
-	private int[] v;
+	private VolatileInteger[] num;
+	private VolatileBoolean[] eligiendo;
 	
 	// TODO 2.1: Declarar atributos
 
 	public Exclusion(int numProcesos) {
 		this.numProcesos = numProcesos;
 		// TODO 2.2: Inicializar atributos
-		v = new int[numProcesos];
+		num = new VolatileInteger[numProcesos];
+		eligiendo = new VolatileBoolean[numProcesos];
 	}
 
 	public void obtener(int idProceso) {
