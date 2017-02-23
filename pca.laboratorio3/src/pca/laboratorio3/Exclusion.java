@@ -3,11 +3,14 @@ package pca.laboratorio3;
 public class Exclusion {
 
 	private int numProcesos;
+	private int[] v;
+	
 	// TODO 2.1: Declarar atributos
 
 	public Exclusion(int numProcesos) {
 		this.numProcesos = numProcesos;
 		// TODO 2.2: Inicializar atributos
+		v = new int[numProcesos];
 	}
 
 	public void obtener(int idProceso) {
