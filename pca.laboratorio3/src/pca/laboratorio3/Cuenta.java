@@ -4,6 +4,7 @@ class Cuenta {
 
 	private String codigo;
 	private int saldo;
+	private Exclusion em;
 	// TODO 3.1: Definir atributos para conseguir exclusion mutua
 
 	public Cuenta(String codigo, int numCajeros) {
@@ -13,11 +14,15 @@ class Cuenta {
 
 	// TODO 3.2: Conseguir exclusion mutua
 	public void ingresar(int idCajero, int cantidad) throws CuentaException {
-		if (cantidad < 0) {
-			throw new CuentaException(codigo,
-					"Ingreso de cantidad " + cantidad + " negativa");
+		try {
+			if (cantidad < 0) {
+				throw new CuentaException(codigo,
+						"Ingreso de cantidad " + cantidad + " negativa");
+			}
+			saldo = saldo + cantidad;
+		} finally {
+			//Liberar
 		}
-		saldo = saldo + cantidad;
 	}
 
 	// TODO 3.2: Conseguir exclusion mutua
@@ -28,8 +33,8 @@ class Cuenta {
 		}
 		if (cantidad > saldo) {
 			throw new CuentaException(codigo,
-					"Saldo " + saldo + " insuficiente" +
-					" para retirada de " + cantidad);
+					"Saldo " + saldo + " insuficiente"
+					+ " para retirada de " + cantidad);
 		}
 		saldo = saldo - cantidad;
 	}
