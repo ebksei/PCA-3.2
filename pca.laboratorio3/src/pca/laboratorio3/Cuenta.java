@@ -10,12 +10,12 @@ class Cuenta {
 	public Cuenta(String codigo, int numCajeros) {
 		this.codigo = codigo;
 		saldo = 0;
-		em = new Exclusion(numCajeros*2);
+		em = new Exclusion(numCajeros);
 	}
 
 	// TODO 3.2: Conseguir exclusion mutua
 	public void ingresar(int idCajero, int cantidad) throws CuentaException {
-		em.obtener(idCajero*2);
+		em.obtener(idCajero);
 		try {
 			if (cantidad < 0) {
 				throw new CuentaException(codigo,
@@ -24,27 +24,26 @@ class Cuenta {
 			saldo = saldo + cantidad;
 		} finally {
 			//Liberar
-			em.liberar(idCajero*2);
+			em.liberar(idCajero);
 		}
 	}
 
 	// TODO 3.2: Conseguir exclusion mutua
 	public void retirar(int idCajero, int cantidad) throws CuentaException {
-		em.obtener(idCajero*2+1);
-		try{
-		if (cantidad < 0) {
-			throw new CuentaException(codigo,
-					"Retirada de cantidad " + cantidad + " negativa");
-		}
-		if (cantidad > saldo) {
-			throw new CuentaException(codigo,
-					"Saldo " + saldo + " insuficiente"
-					+ " para retirada de " + cantidad);
-		}
-		saldo = saldo - cantidad;
-		}
-		finally{
-			em.liberar(idCajero*2+1);
+		em.obtener(idCajero);
+		try {
+			if (cantidad < 0) {
+				throw new CuentaException(codigo,
+						"Retirada de cantidad " + cantidad + " negativa");
+			}
+			if (cantidad > saldo) {
+				throw new CuentaException(codigo,
+						"Saldo " + saldo + " insuficiente"
+						+ " para retirada de " + cantidad);
+			}
+			saldo = saldo - cantidad;
+		} finally {
+			em.liberar(idCajero);
 		}
 	}
 

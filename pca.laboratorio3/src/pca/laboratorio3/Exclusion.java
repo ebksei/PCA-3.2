@@ -52,7 +52,6 @@ public class Exclusion {
             while ( (num[j].get()!= 0) &&
 					((num[j].get() < num[idProceso].get()) || (num[j].get() == num[idProceso].get() && j<idProceso)) ) { }  
 		}
-
 	}
 
 	public void liberar(int idProceso) {
