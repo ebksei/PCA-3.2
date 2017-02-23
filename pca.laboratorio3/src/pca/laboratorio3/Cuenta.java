@@ -49,11 +49,21 @@ class Cuenta {
 
 	// TODO 3.2: Conseguir exclusion mutua
 	public String getCodigo(int idCajero) {
-		return codigo;
+		em.obtener(idCajero);
+		try {
+			return codigo;
+		} finally {
+			em.liberar(idCajero);
+		}
 	}
 
-	// TODO 3.2: Conseguir exclusion mutua
+// TODO 3.2: Conseguir exclusion mutua
 	public int getSaldo(int idCajero) {
-		return saldo;
+		em.obtener(idCajero);
+		try {
+			return saldo;
+		} finally {
+			em.liberar(idCajero);
+		}
 	}
 }
