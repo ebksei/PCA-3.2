@@ -13,8 +13,13 @@ public class Exclusion {
 	public Exclusion(int numProcesos) {
 		this.numProcesos = numProcesos;
 		// TODO 2.2: Inicializar atributos
-		num = new VolatileInteger[numProcesos];
-		eligiendo = new VolatileBoolean[numProcesos];
+		num = new VolatileInteger[numProcesos];		
+		eligiendo = new VolatileBoolean[numProcesos];	
+		
+		for (int i = 0; i < numProcesos; i++) {
+			num[i] = new VolatileInteger(0);
+			eligiendo[i] = new VolatileBoolean(false);
+		}
 	}
 
 	public void obtener(int idProceso) {
