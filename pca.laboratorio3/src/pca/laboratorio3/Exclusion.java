@@ -43,14 +43,15 @@ public class Exclusion {
 		/* Compara con todos los hilos */
 		for (int j = 0; j < numProcesos; j++) {
 			/* Si el hilo j está calculando su número, espera a que termine */
-			while (eligiendo[idProceso].get()) {
+			while (eligiendo[j].get()) {
 			}
 
 			/* Si el hilo j tiene más prioridad, espera a que ponga su número a cero */
 			/* j tiene más prioridad si su número de turno es más bajo que el de idProceso,  */
 			/*  o bien si es el mismo número y además j es menor que idProceso               */
-            while ( (num[j].get()!= 0) &&
-					((num[j].get() < num[idProceso].get()) || (num[j].get() == num[idProceso].get() && j<idProceso)) ) { }  
+			while ((num[j].get() != 0)
+					&& ((num[j].get() < num[idProceso].get()) || (num[j].get() == num[idProceso].get() && j < idProceso))) {
+			}
 		}
 	}
 
